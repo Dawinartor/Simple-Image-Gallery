@@ -1,17 +1,20 @@
-var createError = require('http-errors'); //
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors');
-var nodeStatic = require('node-static');
+const createError = require('http-errors'); 
+const express = require('express');
+const port = 3011;
+const imagesDir = '/images';
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cors = require('cors');
+const fileSystem = require('fs');
+
 
 // define routes as variables
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var processImages = require("./routes/processImages");
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const processImages = require("./routes/processImages");
 
-var app = express(); //
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,7 +31,7 @@ app.use(cookieParser());
 app.use(express.static('public'));
 
 //Serves all the request which includes /images in the url from Images folder
-app.use('/images', express.static(__dirname + '/images'));
+app.use('/images', express.static(__dirname + imagesDir));
 
 
 
@@ -38,6 +41,24 @@ app.use("/processImages", processImages);
 
 
 //TODO: Add POST & GET functions to Server-Side Application
+
+//TODO: Create informations and save it in txt file
+function saveImageInformations(title='default', date='01.01.1000', imageURL='./public/images') {
+  fileSystem.writeFile(
+    './public/informations/imageInformations.txt',
+    title + '_' + date + '_' + imageURL + '\r\n',
+    function (err) {
+      if (err) return console.log(err);
+    }
+  );
+}
+
+
+function countImage() {
+  fileSystem.readdir('./public/images', (err, files) => {
+    console.log(files);
+  });
+} 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -54,5 +75,12 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+//* Server is listeing
+app.listen(port, () => {
+  console.log("Hello");
+  countImage();
+  saveImageInformations();
+})
 
 module.exports = app;
