@@ -1,0 +1,5 @@
+.picture-gallery {
+    /* Bilder werden von links nach rechts aufgereiht */
+    display: flex;
+    flex-wrap: wrap;
+}

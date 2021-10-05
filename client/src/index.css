@@ -1,0 +1,7 @@
+body {
+    margin: 20px 20px;
+    background-color: rgb(58, 160, 255);
+    font-family: Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
