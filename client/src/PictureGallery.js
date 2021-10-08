@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Picture from './Picture';
 import './PictureGallery.css';
+//TODO: Get Images by server-side
 import img1 from './pictures/flowers.jpg';
-import img2 from './pictures/ripJPG.jpg';
 
-function PictureGallery() {
-    const pictures = [
-        {source: img1, title: "Hallo", createDate: "19.06.1996" },
-        {source: img2, title: "Bye", createDate: "22.08.21" }
-    ];
+
+class PictureGallery extends React.Component(props) {
     
+    const Pictures = props => {
+
+        const [source, setSource] = useState([])
+        const [title, setTitle] = useState([])
+        const [date, setDate] = useState([])
+
+        const pictureHandler = (source, title, date) => {
+            setSource([source])
+            setTitle([title])
+            setDate([date])
+        }
+    };
+
 
     return(
         <div className="picture-gallery">
-            { pictures.map((picture, i) => <Picture source={picture.source} title={picture.title} createDate={picture.createDate} key={i} />) }
+            { Pictures.map((picture, i) => <Picture source={picture.source} title={picture.title} createDate={picture.createDate} key={i} />) }
         </div>
     )
 }

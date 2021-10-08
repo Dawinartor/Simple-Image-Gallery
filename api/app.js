@@ -43,7 +43,7 @@ app.use("/processImages", processImages);
 //TODO: Add POST & GET functions to Server-Side Application
 
 //TODO: Create informations and save it in txt file
-function saveImageInformations(title='default', date='01.01.1000', imageURL='./public/images') {
+function saveImageInformations(title='default', date='01.01.1001', imageURL='./public/images') {
   fileSystem.writeFile(
     './public/informations/imageInformations.txt',
     title + '_' + date + '_' + imageURL + '\r\n',
