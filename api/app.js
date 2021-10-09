@@ -37,7 +37,7 @@ app.use('/images', express.static(__dirname + imagesDir));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use("/processImages", processImages);
+app.use("/processimages", processImages);
 
 
 //TODO: Add POST & GET functions to Server-Side Application

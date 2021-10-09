@@ -13,7 +13,12 @@ function PictureGallery() {
         const [pictures, setPictures] = useState([])
 
         useEffect(() => {
-            fetch('172.22.142.174/public/images')// Fetch my back-end API
+            // Fetch my back-end API
+            fetch('172.22.142.174/public/images',
+            {
+                method: 'GET',
+                headers: 
+            })
             return () => {
                 cleanup
             }

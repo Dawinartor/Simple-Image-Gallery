@@ -9,7 +9,8 @@ var filesystem = require('fs');
 
 
 router.get("/", function(req, res, next) {
-    
+    console.log("++ Hello ++");
+    console.log(req.headers);
 });
 
 router.post("/upload", )
