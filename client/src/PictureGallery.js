@@ -5,19 +5,19 @@ import './PictureGallery.css';
 import img1 from './pictures/flowers.jpg';
 
 
-function PictureGallery {
+function PictureGallery() {
     
     const Pictures = props => {
 
-        const [source, setSource] = useState([])
-        const [title, setTitle] = useState([])
-        const [date, setDate] = useState([])
+        const [pictureCount, setPictureCount] = useState(0)
+        const [pictures, setPictures] = useState([])
 
-        const pictureHandler = (source, title, date) => {
-            setSource([source])
-            setTitle([title])
-            setDate([date])
-        }
+        useEffect(() => {
+            fetch('172.22.142.174/public/images')// Fetch my back-end API
+            return () => {
+                cleanup
+            }
+        }, [input])
     };
 
 

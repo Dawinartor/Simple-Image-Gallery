@@ -1,3 +1,5 @@
+/* To upload my images into the NodeJS server */
+
 var express = require('express');
 var router = express.Router();
 
