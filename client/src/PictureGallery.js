@@ -5,7 +5,7 @@ import './PictureGallery.css';
 import img1 from './pictures/flowers.jpg';
 
 
-class PictureGallery extends React.Component(props) {
+function PictureGallery {
     
     const Pictures = props => {
 

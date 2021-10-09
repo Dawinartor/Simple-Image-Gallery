@@ -6,10 +6,6 @@ class Picture extends Component {
         super(props)
     }
 
-    //TODO:
-    componentDidMount(prevProps) {
-        //TODO: if-Bedingung verwenden, für den Fall einer Änderung
-    }
 
     render() {
         return(
