@@ -45,7 +45,7 @@ app.use("/processimages", processImages);
 //TODO: Create informations and save it in txt file
 function saveImageInformations(title='default', date='01.01.1001', imageURL='./public/images') {
   fileSystem.writeFile(
-    './public/informations/imageInformations.txt',
+    './public/imagebase/imageInformations.json',
     title + '_' + date + '_' + imageURL + '\r\n',
     function (err) {
       if (err) return console.log(err);

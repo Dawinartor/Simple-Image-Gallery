@@ -5,7 +5,21 @@ const router = express.Router();
 // to upload files into server
 const filesystem = require('fs');
 
+// read current JSON database as JSON & return as object
+function readJSON() {
+    /**
+     * read and return imagebase as JSON
+     */
+   let imagebase = filesystem.readFile('./public/imagebase/imageInformations.json', 'utf8', (err, data) => {
+       if (err) throw err; 
+       //console.log("Data successfully read!");
+       console.log(imagebase);
+   });
+   return imagebase;
+}
+
 function imageToJSON(title='default', date='01.01.1001', imageURL='../public/images/firstUpload') {
+
     filesystem.writeFile(
         './public/informations/imageInformations.txt',
     )
@@ -23,7 +37,8 @@ function uploadPicture(picture=null) {
 
 router.get("/", function(req, res, next) {
     console.log("++ Hello ++");
-    console.log(req.headers);
+    console.log(req.headers); // TODO: Add specific HEADERS to your API
+    readJSON();
 });
 
 router.post("/upload", function(req, res, next) {
