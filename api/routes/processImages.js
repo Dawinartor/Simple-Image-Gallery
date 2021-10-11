@@ -10,10 +10,10 @@ function readJSON() {
     /**
      * read and return imagebase as JSON
      */
-   let imagebase = filesystem.readFile('./public/imagebase/imageInformations.json', 'utf8', (err, data) => {
+   let imagebase = filesystem.readFile('./public/imagebase/imageInformations.json', (err, data) => {
        if (err) throw err; 
        //console.log("Data successfully read!");
-       console.log(imagebase);
+       console.log(JSON.parse(imagebase).toString());
    });
    return imagebase;
 }
