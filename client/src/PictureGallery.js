@@ -17,7 +17,7 @@ function PictureGallery() {
             fetch('172.22.142.174/public/images',
             {
                 method: 'GET',
-                headers: 
+                headers: // which header could make sense?
             })
             return () => {
                 cleanup
