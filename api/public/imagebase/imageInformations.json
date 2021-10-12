@@ -1,1 +1,28 @@
-default_01.01.1001_./public/images
+{
+    "images": {
+        "img0": {
+            "index": 0,
+            "title": "A",
+            "date": "11.12.2011",
+            "sourceURL": "../public/images/flowers.jpg"
+        },
+        "img1": {
+            "index": 1,
+            "title": "AB",
+            "date": "31.12.2019",
+            "sourceURL": "../public/images/galaxy.jpg"
+        },
+        "img2": {
+            "index": 2,
+            "title": "ABC",
+            "date": "19.06.1996",
+            "sourceURL": "../public/images/palms.jpg"
+        },
+        "img3": {
+            "index": 3,
+            "title": "ABCD",
+            "date": "06.05.1999",
+            "sourceURL": "../public/images/ripJPG.jpg"
+        }
+    }
+}

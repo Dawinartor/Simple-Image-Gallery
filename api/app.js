@@ -33,8 +33,7 @@ app.use(express.static('public'));
 //Serves all the request which includes /images in the url from Images folder
 app.use('/images', express.static(__dirname + imagesDir));
 
-
-
+// define files where scripts in for all routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/processimages", processImages);
@@ -43,6 +42,7 @@ app.use("/processimages", processImages);
 //TODO: Add POST & GET functions to Server-Side Application
 
 //TODO: Create informations and save it in txt file
+/*
 function saveImageInformations(title='default', date='01.01.1001', imageURL='./public/images') {
   fileSystem.writeFile(
     './public/imagebase/imageInformations.json',
@@ -52,10 +52,12 @@ function saveImageInformations(title='default', date='01.01.1001', imageURL='./p
     }
   );
 }
+*/
 
 
 function countImage() {
   fileSystem.readdir('./public/images', (err, files) => {
+    if (err) throw err;
     console.log(files);
   });
 } 
@@ -79,8 +81,8 @@ app.use(function(err, req, res, next) {
 //* Server is listeing
 app.listen(port, () => {
   console.log("Hello");
-  countImage();
-  saveImageInformations();
+  //countImage();
+  //saveImageInformations();
 })
 
 module.exports = app;
