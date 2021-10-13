@@ -30,6 +30,7 @@ function readBackup() { // TODO: add logging
 }
 
 
+
 //~ Section: Proccess data
 function readDatabase(inputPath="") {
     /** 
@@ -47,8 +48,24 @@ function readDatabase(inputPath="") {
   }
 
 
+
+//~ Section: Tools
+function countImages(input=null) {
+    let count = 0;
+    if (input == null) {
+        console.log("Nothing to count");
+    } else {
+        for (let key in input) {
+            if(input.hasOwnProperty(key))
+            count++;
+        }
+    }
+    return count;
+}
+
 // TODO: Move this to client-side
 function imageToJSON(title='default', date='01.01.1001', sourceURL='../public/images/firstUpload') {
+
 
     filesystem.writeFile(
         './public/informations/imageInformations.txt',
@@ -71,15 +88,20 @@ function uploadPicture(pictureJSON=null) {
 }
 
 
+
+//~ Section: Handle client requests
 router.get("/", function(req, res, next) {
     //console.log(req.headers); // TODO: Add specific HEADERS to your API
-    console.log(backup);
-    console.log(database);
-    readDatabase(database);
+    let test = readDatabase(database);
+    res.send(test.img0);
+    console.log(countImages(test));
 });
 
-router.post("/upload", function(req, res, next) {
 
+router.post("/upload", function(req, res, next) { // send data to server
+    /**
+     * 
+     */
 })
 
 module.exports = router;
