@@ -2,49 +2,69 @@
 const express = require('express');
 const router = express.Router();
 const filesystem = require('fs');
+const { read } = require('fs/promises');
+const path = require('path');
+const backup = path.join(__dirname, '..', 'public', 'imagebase', 'backup.txt');
+const database = path.join(__dirname, '..', 'public', 'imagebase', 'imageInformations.json');
 
-function fallbackBackup(hexData=null) { // TODO: add logging
+
+//~ Section: Backups
+function writeBackup(hexData=null) { // TODO: add logging
     /**
-     * saves readJSON as HEX values in simple .txt to cover information in emergency case
+     * saves output of readDatabase in simple .txt to cover information in emergency case
+     * @param {String} hexData - hexa string
      */
     filesystem.writeFile(
-        './public/imagebase/backup.txt',
-         hexData, (err) => {
+        backup, hexData, (err) => {
             if (err) throw err;
          });
-         //console.log(hexData);
-         console.log("Back-Up successfully"); // instead of console using logging after log-implementation
-    }
-
-var imagebase;
-// read current JSON database as JSON & return as object
-function readJSON() {
-    /**
-     * read and return imagebase as JSON
-     */
-   filesystem.readFile('./public/imagebase/imageInformations.json', (err, data) => {
-       if (err) throw err;
-       if (data == null) { // in case of "null" or "undefined"
-            console.log("result is undefined");        
-       } else {
-            fallbackBackup(data.toString('hex'));
-            imagebase = data.toString();
-       }
-   });
-   // delete imagebase;
+    console.log("Back-Up successfully"); // instead of console using logging after log-implementation
 }
 
+function readBackup() { // TODO: add logging
+    /**
+     * reads backup from predefined source and returnes as JSON object
+     * @returns {JSON} - JSON object
+     */
+    return readDatabase(database); // reused
+}
+
+
+//~ Section: Proccess data
+function readDatabase(inputPath="") {
+    /** 
+     * read current database and return as JSON object
+     * @param {String} inputPath - file path
+     * @returns {JSON} - JSON String
+     */
+    let resJSON = filesystem.readFileSync(
+        database, // is already json
+         (err, data) => {
+             if (err) throw err;
+        });
+    writeBackup(resJSON);
+    return JSON.parse(resJSON);
+  }
+
+
+// TODO: Move this to client-side
 function imageToJSON(title='default', date='01.01.1001', sourceURL='../public/images/firstUpload') {
 
     filesystem.writeFile(
         './public/informations/imageInformations.txt',
+        path.join(__dirname)
     )
 }
 
-function uploadPicture(picture=null) {
+function uploadPicture(pictureJSON=null) {
     /**
-     * Function Jto save informations about the picture and upload the picture localy
+     * Function save informations about the picture and upload the picture localy
+     * @param {JSON} pictureJSON - Picture as JSON-Format
+     * @returns {Boolean} - true if upload was successful, else false
      */   
+
+    let success = false;
+
     filesystem.writeFile(
 
     )
@@ -52,9 +72,10 @@ function uploadPicture(picture=null) {
 
 
 router.get("/", function(req, res, next) {
-    //console.log("++ Hello ++");
     //console.log(req.headers); // TODO: Add specific HEADERS to your API
-    readJSON();
+    console.log(backup);
+    console.log(database);
+    readDatabase(database);
 });
 
 router.post("/upload", function(req, res, next) {
